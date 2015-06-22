@@ -1,0 +1,16 @@
+---
+layout: default
+title: "Blog :: Brian Hong"
+---
+{% for post in paginator.posts %}
+<article class="post">
+	<h1 class="title"><a href="{{ post.url }}" class="title">{{ post.title }}</a></h1>
+	<h4 class="date">{{ post.date | date: "%B %-d %Y" }}</h4>
+	{{ post.excerpt }}
+	<a href="{{ post.url }}" class="readmore">Read more...</a>
+</article>
+<hr>
+{% endfor %}
+{% if paginator.previous_page_path %}<a class="arrow" id="prev" href="{{ paginator.previous_page_path }}">&lsaquo;&lsaquo;Prev</a>{% endif %}
+{% if paginator.next_page_path %}<a class="arrow" id="next" href="{{ paginator.next_page_path }}">Next&rsaquo;&rsaquo;</a>{% endif %}
+<br style="clear:both">
