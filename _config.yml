@@ -3,4 +3,4 @@ title: "Brian Hong :: c0ding_fr0g"
 permalink: /:year/:month-:day-:title.html
 paginate: 3
 paginate_path: "/blog/page:num/"
-exclude: git.run
+exclude: [git.run]

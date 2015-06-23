@@ -11,6 +11,6 @@ title: "Blog :: Brian Hong"
 </article>
 <hr>
 {% endfor %}
-{% if paginator.previous_page_path %}<a class="arrow" id="prev" href="{{ paginator.previous_page_path }}">&lsaquo;&lsaquo;Prev</a>{% endif %}
-{% if paginator.next_page_path %}<a class="arrow" id="next" href="{{ paginator.next_page_path }}">Next&rsaquo;&rsaquo;</a>{% endif %}
+{% if paginator.previous_page_path %}<a class="arrow" id="prev" href="{{ paginator.previous_page_path }}">&lsaquo;&lsaquo;Next</a>{% endif %}
+{% if paginator.next_page_path %}<a class="arrow" id="next" href="{{ paginator.next_page_path }}">Prev&rsaquo;&rsaquo;</a>{% else %}<a class="arrow" id="nomore">--No More Posts--</a>{% endif %}
 <br style="clear:both">
