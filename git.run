@@ -1,9 +1,0 @@
-#!/bin/bash
-git add .
-curtime=`date`
-git commit -m "Automatic Backup @ $curtime"
-git push
-
-#this script is run daily at midnight
-#crontab -e
-#then added: 0 0 * * * cd <working directory> && ./git.run
