@@ -1,3 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Brian S. Hong - misc</title><link href="https://blog.hongs.me/" rel="alternate"></link><link href="https://blog.hongs.me/feeds/misc.atom.xml" rel="self"></link><id>https://blog.hongs.me/</id><updated>2019-01-01T00:01:00-05:00</updated><entry><title>First blog post</title><link href="https://blog.hongs.me/first-blog-post.html" rel="alternate"></link><published>2019-01-01T00:01:00-05:00</published><updated>2019-01-01T00:01:00-05:00</updated><author><name>Brian</name></author><id>tag:blog.hongs.me,2019-01-01:/first-blog-post.html</id><summary type="html">&lt;p&gt;Test post for new blog&lt;/p&gt;</summary><content type="html">&lt;p&gt;Test change.
-&lt;img alt="Test" src="https://blog.hongs.me/img/test.png"&gt;&lt;/p&gt;</content></entry></feed>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Brian S. Hong - misc</title><link href="https://blog.hongs.me/" rel="alternate"></link><link href="https://blog.hongs.me/feeds/misc.atom.xml" rel="self"></link><id>https://blog.hongs.me/</id><updated>2019-02-16T19:00:00-05:00</updated><entry><title>Hello, world!</title><link href="https://blog.hongs.me/hello-world.html" rel="alternate"></link><published>2019-02-16T19:00:00-05:00</published><updated>2019-02-16T19:00:00-05:00</updated><author><name>Brian</name></author><id>tag:blog.hongs.me,2019-02-16:/hello-world.html</id><summary type="html">&lt;p&gt;First blog post&lt;/p&gt;</summary><content type="html">&lt;p&gt;Hello, my name is Brian and this is my blog!&lt;br&gt;
+I had a blog from my high school days, but I've been meaning to re-start the blog for a while now.
+I'm finishing up my last semester at &lt;a href="https://cooper.edu"&gt;Cooper&lt;/a&gt; and working at &lt;a href="https://www.redballoonsecurity.com"&gt;Red Balloon Security&lt;/a&gt; while I do.  &lt;/p&gt;
+&lt;p&gt;I do have some ideas for blog posts, mostly some of the projects I've recently done or been working on.&lt;br&gt;
+For my senior project at school, I am building a PCIe card with an FPGA on it that users and upload different bitstreams on it to.. do different things...
+We call it &lt;a href="https://github.com/RASAC-dev"&gt;RASAC&lt;/a&gt;, Reconfigurable Application Specific Accelerator Card.  &lt;/p&gt;
+&lt;p&gt;Another project (that I have recently finished), is the &lt;a href="https://github.com/ME-IRL/BUUL_firmware"&gt;BUUL&lt;/a&gt; (Brian's JUUL). It is supposed to be a JUUL clone.
+I've also built an Alexa controlled power outlet, just because, even though you can just buy them on Amazon...
+I also have interests on rocketry, so hopefully there'll be posts on that.&lt;/p&gt;
+&lt;p&gt;So I guess that's for now&lt;br&gt;
+73,&lt;br&gt;
+-KD2LSL&lt;/p&gt;</content></entry></feed>
