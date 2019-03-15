@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>BUUL Part 1: Reversing the JUUL - Brian S. Hong</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="https://blog.hongs.me/favicon.ico" rel="icon">
+
+<link rel="canonical" href="https://blog.hongs.me/buul-part-1-reversing-the-juul.html">
+
+        <meta name="author" content="Brian" />
+        <meta name="description" content="A $5 clone of a JUUL vaporizer. I gather information about the JUUL so that I could build one." />
+
+        <meta property="og:site_name" content="Brian S. Hong" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="BUUL Part 1: Reversing the JUUL"/>
+        <meta property="og:url" content="https://blog.hongs.me/buul-part-1-reversing-the-juul.html"/>
+        <meta property="og:description" content="A $5 clone of a JUUL vaporizer. I gather information about the JUUL so that I could build one."/>
+        <meta property="article:published_time" content="2019-03-14" />
+            <meta property="article:section" content="Projects" />
+            <meta property="article:author" content="Brian" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://blog.hongs.me/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="https://blog.hongs.me/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="https://blog.hongs.me/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://blog.hongs.me/theme/css/style.css" type="text/css"/>
+
+        <link href="https://blog.hongs.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brian S. Hong ATOM Feed"/>
+
+        <link href="https://blog.hongs.me/feeds/projects.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brian S. Hong Projects ATOM Feed"/>
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="https://blog.hongs.me/" class="navbar-brand">
+Brian S. Hong            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="/pages/about-me.html">About</a></li>
+                    <li><a href="https://github.com/awkwardbunny">GitHub</a></li>
+                    <li><a href="https://linkedin.com/in/brianshong">LinkedIn</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="https://blog.hongs.me/buul-part-1-reversing-the-juul.html"
+                       rel="bookmark"
+                       title="Permalink to BUUL Part 1: Reversing the JUUL">
+                        BUUL Part 1: Reversing the JUUL
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2019-03-14T19:30:00-04:00"> Thu 14 March 2019</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>So, as mentioned in the <a href="/hello-world.html">Hello World</a> post, I've recently built a vaporizer
+that is supposed to be a clone of the popular JUUL.<br>
+It accepts regular JUUL pods (and now MYLE pods as well).  </p>
+<h2>Why?</h2>
+<p>Well, why did I build it?<br>
+So my friend came up to me a few weeks ago, frantically, saying, "BRIAN! I need your help.
+I lost my vape. Could you engineer me a new one?!?!"<br>
+He ended up buying a new one soon after, but I said, "Challenge accepted!"
+(Plus I thought it'd be a fun little quick project to do)</p>
+<h2>(Kinda) Reversing the JUUL</h2>
+<p>So I had some ideas in my head. I definitely did not want to make an entire vaporizer from
+scratch, and I also wanted it to fit regular pods.  </p>
+<p>Vaporizers have 3 major parts: the power supply, the coil, and the tank.
+The power supply produces the voltage and current necessary.
+The coil receives the power from the supply and heats up.
+The tank holds the liquid, which vaporizes from the coil's heat and is then inhaled by the user.</p>
+<p><img alt="Vape Diagram" src="https://blog.hongs.me/img/001_vape_diagram.png"><br>
+Ok, I tried. I tried to find a good diagram that depicts something like the above diagram,
+but couldn't... So I drew my own.<br>
+Honestly, now that I look at it, maybe the other diagrams were better...
+Well, you're stuck with this.</p>
+<p>The JUUL has (mainly) two parts: the power supply (that's the long silver/black/red meta part)
+and the pod (that's replaceable and contains the "e-juice" that gets vaporized)  </p>
+<p>Conveniently, the pods contain the coil as well, which means I won't have to deal with any of
+the coil or the liquids. I've got a hold of a few used pods and took them apart. It's fairly
+simple; submerged in the ink is an assembly of a coil wrapped around some wick that pulls the
+liquid into the coil.  </p>
+<p>Firstly, trying to figure out how the JUUL works or does the vaporization thingy,
+I did some research. It didn't take long at all until I found <a href="https://www.juul.com/intellectual-property-list">JUUL's patents page</a>. The first one listed (<a href="https://patents.google.com/patent/US9215895B2/en">US9215895B2</a>) actually has some cool data and graphs. Most of the other ones are about their
+"Vaporization Device Systems and Methods" and different versions of it, but I found
+<a href="https://patents.google.com/patent/US10045568B2/en">US10045568B2</a> the most useful. It looks
+like its got the most recent form for the pod.</p>
+<p><img alt="JUUL Patent Pod Exploded View" src="https://blog.hongs.me/img/001_juul_patent_pod_exploded.png"><br>
+Now that's a proper diagram. I don't know how to properly cite a source for a diagram from a patent.</p>
+<p><img alt="JUUL Patent Pod Diagram" src="https://blog.hongs.me/img/001_juul_patent_pod_diagram.png"><br>
+Also from the same patent. This diagram looks most like the actual JUUL pod.
+I also don't know how to properly size images either.</p>
+<p>On the bottom of the pod are the two contacts that the power pack supplies the power through to
+the coil inside the pod. There doesn't seem to be any kind of circuitry besides that inside the
+pods themselves.</p>
+<p>In the earlier versions of the JUUL, seen in the other patents, it seems like they
+were planning to add a small microcontroller of some kinds inside the pod for smart operations
+and maybe DRM. Probably DRM. Not really DRM, but like, similar. Maybe I should've actually read
+the patents. They likely ditched the idea since it would make the pods more costly.</p>
+<p>Anyways, back on topic. All I have to do was mimic the JUUL power supply. To do this, I first
+need to figure out how much power it provides. To do this, I need to know the voltage and
+current. To do <em>that</em> I wanted to mimic the pod so that I can plug it into the JUUL and measure
+the output. So I did. The resistance across the coil measured through the exposed contacts was
+about 1.6 ohms.</p>
+<p>Also I've noticed that the JUUL has a short circuit protection. Which is generally a smart idea,
+especially for consumer devices and for small gadgets that people put inside pockets and throw
+around. When the two pins inside the JUUL are shorted, the LED blinks orange a few times. Okay.</p>
+<p>So that next step was for me to connect 1.6 ohms across the contacts on the JUUL and measure the
+output. I've also noticed that when a pod was connected, the LED blinks white once. It must
+have some measuring circuit to know when there is a pod inserted. I gutted out the said used
+JUUL pods, and after soaking their disassembled parts in alcohol for a few minutes and cleaning
+them, reassembled it, only without the coil and two resistors in its place to make ~1.5 ohms.</p>
+<p>Oh man, I'm writing this like it's a lab report.</p>
+<p><img alt="Modified JUUL Pod with Resistors" src="https://blog.hongs.me/img/001_juul_pod_mod_resistor.jpg"><br>
+So I did that.  </p>
+<p>And it worked.<br>
+When I plugged it in, the light lit up once, which indicates that a pod had been plugged in.
+I simulated a "pull" and the resistors got hot. I also hooked up a voltmeter across the
+resistors during it and it measured about 3.3 volts.  </p>
+<p>Great! I have the voltage, and all I need now is the current. I tried to measure the current
+that the resistors were drawing. I started by hooking up an ammeter in series, but that
+messes with the resistance of the load, so that didn't work. For about a good 30 minutes, I
+couldn't figure it out...  </p>
+<p>And then I slammed my head on the table. OHM'S LAW! How could I forget. I already had all the
+information to get the current draw. I have the resistance and the voltage across it.
+Applying Ohm's law, 3.3V / 1.6 Ohms gives me a little over 2 amps. Wow, this thing consumes
+over 6 Watts of power! Makes a little sense since all that heat energy is being used to
+vaporize the liquids.</p>
+<p>This is kinda getting long and I'm tired. I don't know. Maybe I'll leave this here for now.
+Come back for part two for power supply design and possibly prototyping and building it.</p>
+<p>By the way, the finished (or is it?) design files and code can be found <a href="https://github.com/ME-IRL">here</a>. I've made a page for some of the side projects I do. They're all gonna be under the page
+<strong>Mechanical and Electrical Industry Research Labs</strong> aka ME-IRL.</p>
+<p>Thanks for reading.
+73,<br>
+-Brian</p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2019 Brian
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="https://blog.hongs.me/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://blog.hongs.me/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="https://blog.hongs.me/theme/js/respond.min.js"></script>
+
+
+
+
+</body>
+</html>
