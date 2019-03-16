@@ -22,6 +22,8 @@ Honestly, now that I look at it, maybe the other diagrams were better...
 Well, you're stuck with this.&lt;/p&gt;
 &lt;p&gt;The JUUL has (mainly) two parts: the power supply (that's the long silver/black/red meta part)
 and the pod (that's replaceable and contains the "e-juice" that gets vaporized)  &lt;/p&gt;
+&lt;p&gt;Here's a picture of a pod:
+&lt;img alt="POD Teardown" src="https://blog.hongs.me/img/001_pod_teardown.jpg"&gt;  &lt;/p&gt;
 &lt;p&gt;Conveniently, the pods contain the coil as well, which means I won't have to deal with any of
 the coil or the liquids. I've got a hold of a few used pods and took them apart. It's fairly
 simple; submerged in the ink is an assembly of a coil wrapped around some wick that pulls the
@@ -76,6 +78,6 @@ vaporize the liquids.&lt;/p&gt;
 Come back for part two for power supply design and possibly prototyping and building it.&lt;/p&gt;
 &lt;p&gt;By the way, the finished (or is it?) design files and code can be found &lt;a href="https://github.com/ME-IRL"&gt;here&lt;/a&gt;. I've made a page for some of the side projects I do. They're all gonna be under the page
 &lt;strong&gt;Mechanical and Electrical Industry Research Labs&lt;/strong&gt; aka ME-IRL.&lt;/p&gt;
-&lt;p&gt;Thanks for reading.
+&lt;p&gt;Thanks for reading.&lt;br&gt;
 73,&lt;br&gt;
 -Brian&lt;/p&gt;</content></entry></feed>
