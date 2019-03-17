@@ -1,5 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Brian S. Hong - Projects</title><link href="https://blog.hongs.me/" rel="alternate"></link><link href="https://blog.hongs.me/feeds/projects.atom.xml" rel="self"></link><id>https://blog.hongs.me/</id><updated>2019-03-14T19:30:00-04:00</updated><entry><title>BUUL Part 1: Reversing the JUUL</title><link href="https://blog.hongs.me/buul-part-1-reversing-the-juul.html" rel="alternate"></link><published>2019-03-14T19:30:00-04:00</published><updated>2019-03-14T19:30:00-04:00</updated><author><name>Brian</name></author><id>tag:blog.hongs.me,2019-03-14:/buul-part-1-reversing-the-juul.html</id><summary type="html">&lt;p&gt;A $5 clone of a JUUL vaporizer. I gather information about the JUUL so that I could build one.&lt;/p&gt;</summary><content type="html">&lt;p&gt;So, as mentioned in the &lt;a href="/hello-world.html"&gt;Hello World&lt;/a&gt; post, I've recently built a vaporizer
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Brian S. Hong - Projects</title><link href="https://blog.hongs.me/" rel="alternate"></link><link href="https://blog.hongs.me/feeds/projects.atom.xml" rel="self"></link><id>https://blog.hongs.me/</id><updated>2019-03-16T14:30:00-04:00</updated><entry><title>BUUL Part 2: Design</title><link href="https://blog.hongs.me/buul-part-2-design.html" rel="alternate"></link><published>2019-03-16T14:30:00-04:00</published><updated>2019-03-16T14:30:00-04:00</updated><author><name>Brian</name></author><id>tag:blog.hongs.me,2019-03-16:/buul-part-2-design.html</id><summary type="html">&lt;p&gt;Design of the JUUL vaporizer clone.&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is the part two of my vaporizor writeup. You can find part one &lt;a href="/buul-part-1-reversing-the-juul.html"&gt;here&lt;/a&gt;.&lt;br&gt;
+&lt;strong&gt;Note: THIS POST IS INCOMPLETE&lt;/strong&gt;&lt;/p&gt;
+&lt;h2&gt;Power Supply&lt;/h2&gt;
+&lt;p&gt;Now that I know the voltage and how much current it needs to be able to supply, I can start
+designing the power supply. Since it needs to output a whopping 6 watts, I decided to go
+with a switch mode power supply.&lt;/p&gt;
+&lt;h3&gt;Types of Voltage Regulators.&lt;/h3&gt;
+&lt;p&gt;Here, I'll discuss a few different types of voltage regulators.&lt;br&gt;
+First, there are the linear regulators. They are often quick and easy to use, but can be
+very inefficient, espcially for high loads. That is because they act like a voltage divider,
+but with feedback and stuff. It's advantages are that it gives a low output ripple and noise.
+It's bad for this case because it is highly inefficient, and to make this project portable,
+it is going to run off a battery. When a linear regulator is used to lower the voltage, all
+that extra power goes directly to heat. For example, If there is a 12 volt input to a 5 volt
+regulator, and the load pulls 1 amps, it will draw 1 amp from the 12V supply and dissipate
+that as heat. So in this example, it would be something like 7 watts per amp drawn.
+(12V - 5V) * 1A  &lt;/p&gt;
+&lt;p&gt;On the other hand, switch mode power supplies tend to be more efficient. They work by
+&lt;em&gt;switching&lt;/em&gt; the output on and off really quickly and smoothing out the ripple with inductors
+and capacitors, until you get the desired voltage. It is similar to how a PWM signal works to
+"fake" an analog signal with a digital signals. In fact, I will be using a PWM signal to a
+transistor to create a buck converter.  &lt;/p&gt;
+&lt;p&gt;Buck converters are a type of switch mode power supplies when the output voltage is lower than
+that of the input. Boost converters are used to increase the voltage from a lower source.  &lt;/p&gt;
+&lt;h3&gt;The Microcontroller&lt;/h3&gt;
+&lt;p&gt;I needed a microcontroller of some sorts to basically control the vaporizer. A simple operation
+would be that it has a button and the coil/power supply connected and would turn the power on
+when the button is pressed. I was going to use a buck converter, so the microcontroller should
+output the PWM. I did some quick search for cheap and small microcontrollers. I found and decided
+to use the &lt;a href="https://www.microchip.com/wwwproducts/en/ATtiny10"&gt;ATTINY10&lt;/a&gt; of the AVR microcontroller
+series. These things are tiny and consume very little power, also being perfect for small embedded
+projects like this.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="ATTINY10 Pinout" src="https://blog.hongs.me/img/002_attiny_pinout.png"&gt;&lt;br&gt;
+The above is the pinout diagram of the attiny10  microcontroller. There are two pins for power
+(VCC and GND), and a whopping number of 4 GPIOs, which is more than enough. For the basic operation,
+we only really need two I/Os, one for the button and another for the PWM output. The other two I/Os
+can be reserved for extra functionality. I originally planned to have one for LED and the other
+for voltage output feedback, to ensure that the voltage is actually what we want.  &lt;/p&gt;
+&lt;p&gt;Looking at some other features of the attiny10, it's got a programmable timer, two PWM channels,
+4 8-bit ADCs.&lt;/p&gt;
+&lt;h3&gt;Designing a Buck Converter&lt;/h3&gt;
+&lt;p&gt;A basic buck converter looks and works like this:&lt;br&gt;
+&lt;img alt="Buck Converter Diagram" src="https://blog.hongs.me/img/002_buck_converter.png"&gt;&lt;br&gt;
+As mentioned above, the output voltage can be changed or set by changing the duty cycle of the
+on/off times of the switch. The on-off signal from the switch is then 'smoothed' out via the
+LC filter. At first, I was looking to use a built-in switching regulator, but most of them
+seemed to need external inductors anyways. And since I'm already using a MCU for the PWM and to
+do other stuff as well, I decided to just build a buck converter.  &lt;/p&gt;
+&lt;p&gt;Texas Instruments had this document &lt;a href="http://www.ti.com/lit/an/slva477b/slva477b.pdf"&gt;SLVA477B&lt;/a&gt;
+on designing the power stage of a buck converter, which was very useful. I just followed through
+the calculations to get the desired output.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Buck Converter Power Stage" src="https://blog.hongs.me/img/002_buck_converter_sch.png"&gt;&lt;br&gt;
+In my design, I replaced the switch with a transistor. I used an PFET instead of NFET since it
+will be easier to drive it due to biasing (&lt;a href="https://electronics.stackexchange.com/questions/194634/p-channel-vs-n-channel-in-buck-converter"&gt;stackexchange&lt;/a&gt;).
+To choose a transistor, I went on Digikey's parameteric search. I ended up with &lt;a href="https://www.digikey.com/product-detail/en/diodes-incorporated/DMG2305UX-13/DMG2305UX-13DICT-ND/4251589"&gt;DMG2305UX&lt;/a&gt;.
+The most important parameters in this case I think were the threshhold voltage and the voltage+current rating.
+The current has to be higher than 2 amps. This one can deal with 4.2 amps, to be safe.&lt;/p&gt;</content></entry><entry><title>BUUL Part 1: Reversing the JUUL</title><link href="https://blog.hongs.me/buul-part-1-reversing-the-juul.html" rel="alternate"></link><published>2019-03-14T19:30:00-04:00</published><updated>2019-03-14T19:30:00-04:00</updated><author><name>Brian</name></author><id>tag:blog.hongs.me,2019-03-14:/buul-part-1-reversing-the-juul.html</id><summary type="html">&lt;p&gt;A $5 clone of a JUUL vaporizer. I gather information about the JUUL so that I could build one.&lt;/p&gt;</summary><content type="html">&lt;p&gt;So, as mentioned in the &lt;a href="/hello-world.html"&gt;Hello World&lt;/a&gt; post, I've recently built a vaporizer
 that is supposed to be a clone of the popular JUUL.&lt;br&gt;
 It accepts regular JUUL pods (and now MYLE pods as well).  &lt;/p&gt;
 &lt;h2&gt;Why?&lt;/h2&gt;
