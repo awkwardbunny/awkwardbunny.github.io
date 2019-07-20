@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Brian S. Hong</title><link href="https://blog.hongs.me/" rel="alternate"></link><link href="https://blog.hongs.me/feeds/all.atom.xml" rel="self"></link><id>https://blog.hongs.me/</id><updated>2019-03-16T14:30:00-04:00</updated><entry><title>BUUL Part 2: Design</title><link href="https://blog.hongs.me/buul-part-2-design.html" rel="alternate"></link><published>2019-03-16T14:30:00-04:00</published><updated>2019-03-16T14:30:00-04:00</updated><author><name>Brian</name></author><id>tag:blog.hongs.me,2019-03-16:/buul-part-2-design.html</id><summary type="html">&lt;p&gt;Design of the JUUL vaporizer clone.&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is the part two of my vaporizor writeup. You can find part one &lt;a href="/buul-part-1-reversing-the-juul.html"&gt;here&lt;/a&gt;.&lt;br&gt;
-&lt;strong&gt;Note: THIS POST IS INCOMPLETE&lt;/strong&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Brian S. Hong</title><link href="https://blog.hongs.me/" rel="alternate"></link><link href="https://blog.hongs.me/feeds/all.atom.xml" rel="self"></link><id>https://blog.hongs.me/</id><updated>2019-07-20T14:30:00-04:00</updated><entry><title>BUUL Part 2: Design</title><link href="https://blog.hongs.me/buul-part-2-design.html" rel="alternate"></link><published>2019-07-20T14:30:00-04:00</published><updated>2019-07-20T14:30:00-04:00</updated><author><name>Brian</name></author><id>tag:blog.hongs.me,2019-07-20:/buul-part-2-design.html</id><summary type="html">&lt;p&gt;Design of the JUUL vaporizer clone.&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is the part two of my vaporizor writeup. You can find part one &lt;a href="/buul-part-1-reversing-the-juul.html"&gt;here&lt;/a&gt;.&lt;br&gt;
+&lt;strong&gt;Note: THIS POST IS INCOMPLETE&lt;/strong&gt;&lt;br&gt;
+This post will go in depth though the design process.&lt;br&gt;
+Very in depth, also as if it were almost a tutorial on design and KiCad.&lt;br&gt;
+Please &lt;a href="https://thenypost.files.wordpress.com/2014/09/bear1.jpg?quality=90&amp;amp;strip=all&amp;amp;w=606"&gt;bear&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;Power Supply&lt;/h2&gt;
 &lt;p&gt;Now that I know the voltage and how much current it needs to be able to supply, I can start
 designing the power supply. Since it needs to output a whopping 6 watts, I decided to go
@@ -23,7 +26,7 @@ and capacitors, until you get the desired voltage. It is similar to how a PWM si
 transistor to create a buck converter.  &lt;/p&gt;
 &lt;p&gt;Buck converters are a type of switch mode power supplies when the output voltage is lower than
 that of the input. Boost converters are used to increase the voltage from a lower source.  &lt;/p&gt;
-&lt;h3&gt;The Microcontroller&lt;/h3&gt;
+&lt;h2&gt;The Microcontroller&lt;/h2&gt;
 &lt;p&gt;I needed a microcontroller of some sorts to basically control the vaporizer. A simple operation
 would be that it has a button and the coil/power supply connected and would turn the power on
 when the button is pressed. I was going to use a buck converter, so the microcontroller should
@@ -55,7 +58,85 @@ In my design, I replaced the switch with a transistor. I used an PFET instead of
 will be easier to drive it due to biasing (&lt;a href="https://electronics.stackexchange.com/questions/194634/p-channel-vs-n-channel-in-buck-converter"&gt;stackexchange&lt;/a&gt;).
 To choose a transistor, I went on Digikey's parameteric search. I ended up with &lt;a href="https://www.digikey.com/product-detail/en/diodes-incorporated/DMG2305UX-13/DMG2305UX-13DICT-ND/4251589"&gt;DMG2305UX&lt;/a&gt;.
 The most important parameters in this case I think were the threshhold voltage and the voltage+current rating.
-The current has to be higher than 2 amps. This one can deal with 4.2 amps, to be safe.&lt;/p&gt;</content></entry><entry><title>BUUL Part 1: Reversing the JUUL</title><link href="https://blog.hongs.me/buul-part-1-reversing-the-juul.html" rel="alternate"></link><published>2019-03-14T19:30:00-04:00</published><updated>2019-03-14T19:30:00-04:00</updated><author><name>Brian</name></author><id>tag:blog.hongs.me,2019-03-14:/buul-part-1-reversing-the-juul.html</id><summary type="html">&lt;p&gt;A $5 clone of a JUUL vaporizer. I gather information about the JUUL so that I could build one.&lt;/p&gt;</summary><content type="html">&lt;p&gt;So, as mentioned in the &lt;a href="/hello-world.html"&gt;Hello World&lt;/a&gt; post, I've recently built a vaporizer
+The current has to be higher than 2 amps. This one can deal with 4.2 amps, to be safe.&lt;/p&gt;
+&lt;h3&gt;[TODO: Insert More Design Stuff and Calculations]&lt;/h3&gt;
+&lt;p&gt;With that and following the TI SLVA477B document, I got roughly all the values I needed for
+the buck converter.&lt;/p&gt;
+&lt;h2&gt;Schematics&lt;/h2&gt;
+&lt;p&gt;Here's what my entire schematic came out to look like:&lt;br&gt;
+&lt;img alt="Buck Converter Schematic" src="https://blog.hongs.me/img/002_circuit_sch.png"&gt;  &lt;/p&gt;
+&lt;p&gt;The top part is the buck converter and it is basically the circuit shown in the previous section.&lt;br&gt;
+I added another 22uF capacitor for more filtering and the microcontroller part is fairly
+straightforward. The 10k resistor (R2) is there as a &lt;a href="https://www.electronics-tutorials.ws/logic/pull-up-resistor.html"&gt;pull-up&lt;/a&gt;.&lt;br&gt;
+The PWM output pin actually also drives the indicator LED (D2) as well.
+This works because the anode is held high so it will light when the output is driven low,
+which is when the P-channel MOSFET is turned on.
+This has a bonus effect of indicating the power output depending on the PWM duty cycle.
+There are two other pins that are connected that I haven't discussed yet, but we'll come back to them later.&lt;/p&gt;
+&lt;p&gt;The capacitor back on the bottom is for decoupling. What that means in this case is that
+it "de-couples" the AC noise from the DC signal. When the device is triggered, it starts to
+output and the coil will consume about 6W of power, and that is no small amount
+(for a circuit like this). When something like that happens, voltage (or current) can't immediately
+start to flow and the V_IN voltage will drop. If that drops significantly, it may not be enough
+to power the microcontroller. So by having a capacitor bank, it allows the sudden changes to happen
+without dropping the input voltage (kinda like having a water tank and then suddenly everyone turns
+their faucet on at the same time).  &lt;/p&gt;
+&lt;p&gt;I actually didn't populate all of these capacitors, but I had a few extra just in case.  &lt;/p&gt;
+&lt;p&gt;With all that, it was time to do board layout.  &lt;/p&gt;
+&lt;p&gt;Wait, wait... Just to really make sure before I went through all the troubles, I simulated
+the buck converter circuit in LTSpice. If I could just find the files somewhere...&lt;/p&gt;
+&lt;h2&gt;Simulation&lt;/h2&gt;
+&lt;p&gt;The only thing I was really unsure about was whether the transistor I picked out can handle
+the load and also operate properly in the way I set it up.&lt;br&gt;
+Usually, the manufacturers provide models for their components for simulation... in some way.&lt;/p&gt;
+&lt;p&gt;I Googled for "DMG2305UX spice model" and there was one just on the first few hits. (&lt;a href="https://www.diodes.com/spice/download/2275/DMG2305UX.spice.txt"&gt;link&lt;/a&gt;)&lt;br&gt;
+Then I followed the steps &lt;a href="https://www.analog.com/en/technical-articles/ltspice-simple-steps-to-import-third-party-models.html"&gt;here&lt;/a&gt; to import that into LTSpice.&lt;/p&gt;
+&lt;p&gt;The following is the test circuit I drew up:&lt;br&gt;
+&lt;img alt="LTSpice Schematic" src="https://blog.hongs.me/img/002_ltspice_sch.png"&gt;  &lt;/p&gt;
+&lt;p&gt;Here, V2 is the power source (the battery) and V1 is the PWM input to the gate of the transistor (U2).&lt;br&gt;
+The PWM signal is defined by the long PULSE(blah blah) text, each number corresponding to:&lt;br&gt;
+off voltage, on voltage, time delay, rise time, fall time, on time, period, and number of cycles.&lt;br&gt;
+In this case, the period is 4e-6 and on time is 3.5e-6 which is a duty cycle of 0.875.
+The on and off voltages are reversed because a P-channel MOSFET will turn on "when the gate voltage is low."&lt;/p&gt;
+&lt;p&gt;From that we can roughly predict what our output voltage is going to be:&lt;br&gt;
+Input * (duty cycle) = output = 3.7V * (0.875) = 3.2375V  &lt;/p&gt;
+&lt;p&gt;Note that I added R1 as the load with 1.6 ohms, which was the measured resistance of the coil.
+A citcuit like this won't work properly if there is no load.
+If you look at the datasheet for a switching power IC, there will be a minimum load.&lt;/p&gt;
+&lt;p&gt;Here's the simulated waveform:&lt;br&gt;
+&lt;img alt="LTSpice Output" src="https://blog.hongs.me/img/002_ltspice_output_large.png"&gt;  &lt;/p&gt;
+&lt;p&gt;The red plots the PWM signal. Remember that I used a P-channel MOSFET, so it conducts on the low.&lt;br&gt;
+The green is the output voltage across the load R1. It rises once the PWM starts and eventually goes to the desired voltage, which seems to be around 3.2V looking at the figure.  &lt;/p&gt;
+&lt;p&gt;The simulation files will be available is the GitHub repo as well.  &lt;/p&gt;
+&lt;p&gt;Now that I have somewhat verified that this circuit will work, it was time for PCB layout.&lt;br&gt;
+(I also built the circuit to test it, but it is normally a good idea to simulate)&lt;/p&gt;
+&lt;h2&gt;PCB Layout&lt;/h2&gt;
+&lt;p&gt;Beware next block of text up to the layout diagram.&lt;br&gt;
+It's helpful info/tip for people new to this, but will bore you if you're familiar with the process.&lt;br&gt;
+If you don't like it, you may skip to the PCB diagram.&lt;/p&gt;
+&lt;p&gt;First thing you do after drawing out the schematic would be to annotate and perform a DRC.
+In KiCad, the toolbar has a list of tools in order to move onto the PCB layout step.&lt;br&gt;
+&lt;img alt="KiCad Toolbar" src="https://blog.hongs.me/img/002_kicad_toolbar.png"&gt;  &lt;/p&gt;
+&lt;p&gt;The first automaticaly annotates all the components, the second (ladybug) runs electrical rules
+check. It will check for unconnected pins are floating nets and such. Although sometimes, there
+will be some you can ignore because of how the component pins are defined. For example, when you
+have header pins supplying power, it will warn you that there is no power input. That can be fixed
+by going to the options and marking that connection to connection type to be valid.  &lt;/p&gt;
+&lt;p&gt;The third associates each component with a footprint. Some parts will already have one assigned,
+like the ATTINY10 I picked out when I selected the component to put on the schematic.  &lt;/p&gt;
+&lt;p&gt;Anyways, I'll have to go through each and select a footprint for it for the layout.&lt;br&gt;
+After that, I can select the NET button to generate a netlist.  &lt;/p&gt;
+&lt;p&gt;The next two are optional if I wanted to create a Bill of Matrials, listing all the components and the part number.
+The last button there moves over to the layout program.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="BUUL PCB Layout" src="https://blog.hongs.me/img/002_layout.png"&gt;  &lt;/p&gt;
+&lt;p&gt;That's the layout I've come up with. I tried to make the entire thing as small as possible.&lt;br&gt;
+I planned on etching this myself, so I tried to fit everything on a single side as I'm not
+yet ready to do double sided boards, with the lining up and vias and all that.  &lt;/p&gt;
+&lt;p&gt;I think this is enough for the design. I'm gonna end it here.
+Might take for a bit for me to write about prototyping.&lt;/p&gt;
+&lt;p&gt;Thanks for reading.&lt;br&gt;
+73,&lt;br&gt;
+-Brian&lt;/p&gt;</content></entry><entry><title>BUUL Part 1: Reversing the JUUL</title><link href="https://blog.hongs.me/buul-part-1-reversing-the-juul.html" rel="alternate"></link><published>2019-03-14T19:30:00-04:00</published><updated>2019-03-14T19:30:00-04:00</updated><author><name>Brian</name></author><id>tag:blog.hongs.me,2019-03-14:/buul-part-1-reversing-the-juul.html</id><summary type="html">&lt;p&gt;A $5 clone of a JUUL vaporizer. I gather information about the JUUL so that I could build one.&lt;/p&gt;</summary><content type="html">&lt;p&gt;So, as mentioned in the &lt;a href="/hello-world.html"&gt;Hello World&lt;/a&gt; post, I've recently built a vaporizer
 that is supposed to be a clone of the popular JUUL.&lt;br&gt;
 It accepts regular JUUL pods (and now MYLE pods as well).  &lt;/p&gt;
 &lt;h2&gt;Why?&lt;/h2&gt;
