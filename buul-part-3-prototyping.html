@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>BUUL Part 3: Prototyping - Brian S. Hong</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="https://blog.hongs.me/favicon.ico" rel="icon">
+
+<link rel="canonical" href="https://blog.hongs.me/buul-part-3-prototyping.html">
+
+        <meta name="author" content="Brian" />
+        <meta name="description" content="Prototyping of the JUUL vaporizer clone." />
+
+        <meta property="og:site_name" content="Brian S. Hong" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="BUUL Part 3: Prototyping"/>
+        <meta property="og:url" content="https://blog.hongs.me/buul-part-3-prototyping.html"/>
+        <meta property="og:description" content="Prototyping of the JUUL vaporizer clone."/>
+        <meta property="article:published_time" content="2020-01-13" />
+            <meta property="article:section" content="Projects" />
+            <meta property="article:author" content="Brian" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://blog.hongs.me/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="https://blog.hongs.me/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="https://blog.hongs.me/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://blog.hongs.me/theme/css/style.css" type="text/css"/>
+
+        <link href="https://blog.hongs.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brian S. Hong ATOM Feed"/>
+
+        <link href="https://blog.hongs.me/feeds/projects.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Brian S. Hong Projects ATOM Feed"/>
+	<script>
+		if (window.location.host == "blog.hongs.me" && window.location.protocol != "https:"){
+			window.location.protocol = "https:"
+		}
+	</script>
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="https://blog.hongs.me/" class="navbar-brand">
+Brian S. Hong            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="/pages/about-me.html">About</a></li>
+                    <li><a href="https://github.com/awkwardbunny">GitHub</a></li>
+                    <li><a href="https://linkedin.com/in/brianshong">LinkedIn</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="https://blog.hongs.me/buul-part-3-prototyping.html"
+                       rel="bookmark"
+                       title="Permalink to BUUL Part 3: Prototyping">
+                        BUUL Part 3: Prototyping
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2020-01-13T02:30:00-05:00"> Mon 13 January 2020</time>
+    </span>
+
+
+
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>This is the part three of my vaporizor writeup. You can find part one <a href="/buul-part-1-reversing-the-juul.html">here</a> and two <a href="/buul-part-2-design.html">here</a>.<br>
+<strong>Warning: This post layout won't look very good due to it having many large photos and I haven't yet figured out how to display images smaller...</strong></p>
+<h2>Process Description</h2>
+<p>So I left the writeup at the PCB layout.<br>
+In this post, I'll actually build the circuit board.  </p>
+<p>I'll be using the toner transfer method and ferric chloride to do the etching.  </p>
+<p>The basic process is to first create a mask.<br>
+A mask will "mask off" portions of the board where the traces are (or aren't). This is done via exporting the circuit board and printing onto a toner transfer paper. The toner is then transferred onto the copper clad board, covering the parts where the metal should remain. The board is left in a chemical bath for the etch, where the chemical will eat away the copper, leaving just the parts that are masked off. The toner is then removed to reveal an etched circuit board.</p>
+<p>Here's a video showing the process (not by me):<br>
+<span class="videobox">
+                <iframe width="640" height="480"
+                    src='https://www.youtube.com/embed/6uInan-TjiA'
+                    frameborder='0' webkitAllowFullScreen mozallowfullscreen
+                    allowFullScreen>
+                </iframe>
+            </span></p>
+<p>I also experiment with using a photoresist mask in later projects.<br>
+The photoresist method is similar in the way it uses a mask, but it masks where the metal should be etched away instead (inverse). A photoresist material film is applied to the bare copper clad board. The material forms like a resin material when exposed to UV light. A reverse mask is printed on a transparent sheet and placed above the photoresist film to mask off the UV light. The unreacted photoresist is removed and the board is etched.</p>
+<h2>Preparation</h2>
+<p>I prepared:  </p>
+<ul>
+<li>Copper clad board - A sheet of fiberglass or some material with one or both sides laminated with copper sheets  </li>
+<li>Ferric Chloride - This will be our etchant</li>
+<li>Acetone - To remove the toner</li>
+<li>Toner transfer paper - Photopaper can also be used</li>
+<li>LaserJet printer (?) - I just hear that I should use laserjets because of how the ink is printed on the papers (<a href="https://www.element14.com/community/thread/29065/l/toner-transfer-method-for-inkjet-printers?displayFullThread=true">element14</a>). I've never tried it with a inkjet printer.</li>
+<li>Latex gloves - Oh yes those. We ARE dealing with chemicals. Although not particularly harmful, it is a good idea to wear them. They also prevent your hand from being covered in dark yellow stains. You're welcome to read the MSDS, if you'd like (<a href="http://www.labchem.com/tools/msds/msds/LC14380.pdf">MSDS</a>).</li>
+<li>An iron - Like a clothing iron.</li>
+</ul>
+<p>And some other useful things like:</p>
+<ul>
+<li>Some steel wool</li>
+<li>PCB cutter/shear</li>
+<li>Isopropyl Alcohol</li>
+<li>Drill press</li>
+<li>PCB vise</li>
+<li>Sharpie</li>
+<li>Beakers and containers for chemicals and etch bath</li>
+</ul>
+<p>With that, let's get started.</p>
+<h2>Exporting the mask</h2>
+<p>First, I need to export the pcb design from KiCad.<br>
+I used the File -&gt; Plot feature to export just the copper layer to PDF to scale.<br>
+<strong>DO NOT FORGET TO MIRROR</strong><br>
+The pcb mask has to be mirrored since it will be transferred to another sheet.</p>
+<p>I then printed the design onto a toner transfer paper.<br>
+<img alt="PCB Printed on toner transfer paper" src="https://blog.hongs.me/img/003_print_mask.jpg"><br>
+I wanted to save the toner paper, so I cut out a little piece and taped it where the circuit would be printed.</p>
+<h2>Transfer the mask</h2>
+<p>Before transferring, the copper clad board should be cleaned so that the toner sticks to the copper better.
+I like the scrub it with the steel wood first, which cleans extraneous things stuck on the board and also makes it shiny :)<br>
+I then wipe it down with some isopropyl alcohol.<br>
+<img src="https://blog.hongs.me/img/003_clean_copper.jpg" width="640" title="Cleaned up copper clad" alt="Cleaned up copper clad">  </p>
+<p>I then taped the paper face-down on the cleaned surface.<br>
+<img src="https://blog.hongs.me/img/003_paper_taped.jpg" width="640" title="Paper taped to board" alt="Paper taped to board">  </p>
+<p>Pressing time!<br>
+I put the hot iron on top and pressed down on it firmly.<br>
+I pushed down fairly hard, but I've seen that pressing too hard will smear the toner slightly.
+<img src="https://blog.hongs.me/img/003_press.jpg" width="640" title="Pressing time" alt="Pressing time"><br>
+(I used the newspaper to protect the table from the heat)</p>
+<p>After a few minutes, take the iron off the board and dip it into some cold water.
+The tape can be removed and the wet paper can be rubbed off instead of peeling it to avoid peeling off the ink as well.<br>
+<img src="https://blog.hongs.me/img/003_mask.jpg" width="640" title="Mask" alt="Mask"><br>
+This one came out pretty much perfectly, excluding the slightly smudged top right corner, which doesn't matter too much.
+If there are spots or traces that did not get completely covered, a sharpie can be used to cover it up.</p>
+<p>Notice that I also cut the board to correct size.</p>
+<h2>Etch</h2>
+<p>There really isn't too much to etching.<br>
+I covered the back with some tape to not waste the chemical and since it will take a long time to eat away at the entire back layer.<br>
+I added another piece of tape so that I can easily check if finished and pick it up when the etch is done.<br>
+Besides that, I just poured some ferric chloride into the beaker and dropped it in.<br>
+<img src="https://blog.hongs.me/img/003_etch.jpg" width="640" title="Etch" alt="Etch">  </p>
+<p>After removing the toner with some acetone, there's a clean circuit etched onto the board.<br>
+<img src="https://blog.hongs.me/img/003_clean.jpg" width="640" title="Clean PCB" alt="Clean PCB">  </p>
+<p>I quickly inspected it using a multimeter to check if everything is connected/disconnected and then under a microscope to make little cuts on the copper where necessary.</p>
+<h2>Drilling</h2>
+<p>The circuit is done, but I do have some through-hold components, so I will need to drill some holes.<br>
+I don't remember what size drill bit I used (just used one that I found in the cabinet), but I put it in a vise and drilled some holes.<br>
+<img src="https://blog.hongs.me/img/003_drill_press.jpg" width="640" title="Drilling" alt="Drilling"><br>
+<img src="https://blog.hongs.me/img/003_drilled.jpg" width="640" title="Drilled" alt="Drilled">  </p>
+<p>For a single-sided board like this, since I did not etch the back, all the pins may short through the back layer.<br>
+To fix this, I usually make a countersink on the back side with a larger drill bit.<br>
+I plunge just a little bit to try not to drill all the way through.<br>
+Hopefully, this shouldn't short with the pins.<br>
+<img src="https://blog.hongs.me/img/003_divot.jpg" width="640" title="Countersink" alt="Countersink">  </p>
+<p>The final pcb looks like this after cleaning up a bit.<br>
+<img src="https://blog.hongs.me/img/003_pcb.jpg" width="640" title="PCB" alt="PCB">  </p>
+<h2>Assembly</h2>
+<p><img src="https://blog.hongs.me/img/003_assembly.png" width="640" title="After assembly" alt="After assembly"><br>
+(I didn't have the surface mount LEDs yet)</p>
+<h2>Prototype</h2>
+<p>Before I etched and built the entire thing, I made a quick prototype to build and debug the code.<br>
+The same process was used.<br>
+<img src="https://blog.hongs.me/img/003_proto1.jpg" width="320" title="Before etch" alt="Before etch">
+<img src="https://blog.hongs.me/img/003_proto4.jpg" width="640" title="After etch" alt="After etch">
+<img src="https://blog.hongs.me/img/003_proto3.jpg" width="320" title="After cut" alt="After cut">
+<img src="https://blog.hongs.me/img/003_proto2.jpg" width="320" title="Microcontroller" alt="Microcontroller">
+<img src="https://blog.hongs.me/img/003_proto5.jpg" width="480" title="Buck converter" alt="Buck converter">
+<img alt="Prototype" src="https://blog.hongs.me/img/003_proto6.jpg"></p>
+<h2>Final Product</h2>
+<p>Oh, you can see above the parts I 3D printed (battery holder + pod connector), the models for both of which are available in the GitHub repo (<a href="https://github.com/ME-IRL/BUUL_hardware/tree/master/mechanical/v1">mechanical parts</a>).
+I've also replaced the LEDs with the correct surface mount ones.</p>
+<p>So, here's the final assembly.  </p>
+<p><img src="https://blog.hongs.me/img/003_final1.jpg" width="640" title="Final" alt="Final">
+<img src="https://blog.hongs.me/img/003_final2.jpg" width="640" title="Final" alt="Final">
+<img src="https://blog.hongs.me/img/003_final3.jpg" width="640" title="Final" alt="Final"></p>
+<p>I brought this to the guy who asked me to build it about a week later.<br>
+He had apparently forgotten all about it.<br>
+He just said, "oh... I bought a new one..."<br>
+Oh wells.</p>
+<p>So uhh... That's it!<br>
+I've been procrastinating writing this blog for too long, so hopefully I pick it back up soon.<br>
+Not sure if I'll do another post about the BUUL firmware.  </p>
+<p>Anyways, thanks for reading.<br>
+73,<br>
+-Brian</p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2020 Brian
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="https://blog.hongs.me/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://blog.hongs.me/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="https://blog.hongs.me/theme/js/respond.min.js"></script>
+
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-51343835-2']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <!-- End Google Analytics Code -->
+
+
+</body>
+</html>
